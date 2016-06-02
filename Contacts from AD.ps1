@@ -1,0 +1,1 @@
+﻿get-aduser -filter * -searchbase "OU=SBSUSERS,OU=USERS,OU=MYBUSINESS,DC=AMERICANFIRE,DC=LOCAL" -properties * | select-object givenname,surname,mobile,Extension,employeenumber,extensionattribute2 | export-csv -path c:\users\ldeamer\desktop\Contacts.csv

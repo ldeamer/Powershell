@@ -1,0 +1,4 @@
+﻿Import-Module ActiveDirectory
+
+$basepath = "http://afesp1/Shared%20Documents/Employee%20Pictures/"
+get-aduser -filter * -searchbase "OU=SBSUSERS,OU=USERS,OU=MYBUSINESS,DC=AMERICANFIRE,DC=LOCAL" -properties givenname,surname,mobile,extension,EmployeeNumber,Initial,birthday,anniversary, samaccountname | select givenname,surname,mobile,extension,EmployeeNumber,Initial,@{name="birthday";expression={$_.birthday -join ";"}},@{name="anniversary";expression={$_.anniversary -join ";"}}, @{Name ="PictureURL";Expression = {"$($basepath)$($_.samaccountname).jpg"}} | export-csv -path \\afe-lend-d\c$\users\ldeamer\announcement.csv
